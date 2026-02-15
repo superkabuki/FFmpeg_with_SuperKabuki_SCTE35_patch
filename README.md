@@ -12,7 +12,7 @@ ffmpeg with the SuperKabuki SCTE-35 pass through patch applied.
 
 <img width="1068" height="541" alt="image" src="https://github.com/user-attachments/assets/6554cc61-18c5-4ece-8829-09c6d8f0980f" />
 
-__(Of course it runs on OpenBSD)__
+_(Of course it runs on OpenBSD and everything else ffmpeg supports)_
 ---
 
 
