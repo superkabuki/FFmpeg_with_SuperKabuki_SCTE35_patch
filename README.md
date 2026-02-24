@@ -70,7 +70,6 @@ ffmpeg with the SuperKabuki SCTE-35 pass through patch applied.
 
 <img width="1068" height="541" alt="image" src="https://github.com/user-attachments/assets/6554cc61-18c5-4ece-8829-09c6d8f0980f" />
 
-_(Of course it runs on OpenBSD and everything else ffmpeg supports)_
 ---
 
 
@@ -83,14 +82,15 @@ __This is a tarball out of a stable ffmpeg build with the SuperKabuki SCTE35 pat
 1.    `git clone https://github.com/superkabuki/FFmpeg_SCTE35.git`
 
 2.    `cd FFmpeg_SCTE35`
-3.     tar -xvjf ffmpeg-scte35.tbz
+3.     tar -xvjf ffmpeg-superkabuki-02-21-2026.tbz
 
 
-4.    `./configure --enable-shared --extra-version=-SuperKabuki-patch` 
+4.    `./configure  --enable-libfreetype --enable-gpl --enable-nonfree --enable-libx264 --enable-libx265 --enable-openssl --extra-version=-SuperKabuki-patch-02-21-2026 --cc=clang --enable-libsrt --enable-shared
+` 
  
       you can customize configure as needed. <br>
-      I use <br>`./configure --enable-gpl --enable-nonfree --enable-libx264 --enable-libx265 --extra-version=-SuperKabuki-patch`--enable-openssl
-
+      I use <br>`./configure --enable-libfreetype --enable-gpl --enable-nonfree --enable-libx264 --enable-libx265 --enable-openssl --extra-version=-SuperKabuki-patch-02-21-2026 --cc=clang --enable-libsrt --enable-shared
+` 
       There are a lot of ffmpeg configure options available. <br>
       __The superkabuki patch doesn't require any special configure options.__
         
