@@ -56,7 +56,8 @@ diff -ruN FFmpeg/libavformat/mpegtsenc.c FFmpeg-skabuki/libavformat/mpegtsenc.c
 ```
 
 
-# SCTE35-ffmpeg-Kabuki
+# ` ffmpeg & SuperKabuki` 
+# `SCTE35`
 
 ffmpeg with the SuperKabuki SCTE-35 pass through patch applied.
 # FFmpeg with the SuperKabuki SCTE-35 patch applied.
