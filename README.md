@@ -1,3 +1,61 @@
+# 02/23/2026 Fresh new tarball built from latest FFmpeg repo.
+
+### The patch _(adds about 14 lines )_
+```diff
+diff -ruN FFmpeg/libavformat/mpegts.c FFmpeg-skabuki/libavformat/mpegts.c
+--- FFmpeg/libavformat/mpegts.c	2026-02-21 21:47:00.235535891 -0500
++++ FFmpeg-skabuki/libavformat/mpegts.c	2026-02-21 19:46:09.479014553 -0500
+@@ -879,6 +879,7 @@
+     { MKTAG('I', 'D', '3', ' '), AVMEDIA_TYPE_DATA,  AV_CODEC_ID_TIMED_ID3 },
+     { MKTAG('V', 'C', '-', '1'), AVMEDIA_TYPE_VIDEO, AV_CODEC_ID_VC1   },
+     { MKTAG('O', 'p', 'u', 's'), AVMEDIA_TYPE_AUDIO, AV_CODEC_ID_OPUS  },
++    { MKTAG('C', 'U', 'E', 'I'), AVMEDIA_TYPE_DATA,  AV_CODEC_ID_SCTE_35 },
+     { 0 },
+ };
+ 
+diff -ruN FFmpeg/libavformat/mpegtsenc.c FFmpeg-skabuki/libavformat/mpegtsenc.c
+--- FFmpeg/libavformat/mpegtsenc.c	2026-02-21 21:47:00.235535891 -0500
++++ FFmpeg-skabuki/libavformat/mpegtsenc.c	2026-02-21 21:37:29.317155489 -0500
+@@ -444,6 +444,11 @@
+             stream_type = STREAM_TYPE_PRIVATE_DATA;
+         }
+         break;
++    case AV_CODEC_ID_SCTE_35:
++        stream_type = STREAM_TYPE_SCTE_DATA_SCTE_35;
++        st->codecpar->codec_type = AVMEDIA_TYPE_DATA;
++        st->codecpar->codec_id   = AV_CODEC_ID_SCTE_35;
++        break;
+     default:
+         av_log_once(s, AV_LOG_WARNING, AV_LOG_DEBUG, &ts_st->data_st_warning,
+                     "Stream %d, codec %s, is muxed as a private data stream "
+@@ -497,6 +502,11 @@
+     case AV_CODEC_ID_HDMV_TEXT_SUBTITLE:
+         stream_type = STREAM_TYPE_BLURAY_SUBTITLE_TEXT;
+         break;
++    case AV_CODEC_ID_SCTE_35:
++        stream_type = STREAM_TYPE_SCTE_DATA_SCTE_35;
++        st->codecpar->codec_type = AVMEDIA_TYPE_DATA;
++        st->codecpar->codec_id   = AV_CODEC_ID_SCTE_35;
++        break;
+     default:
+         av_log_once(s, AV_LOG_WARNING, AV_LOG_DEBUG, &ts_st->data_st_warning,
+                     "Stream %d, codec %s, is muxed as a private data stream "
+@@ -814,7 +824,9 @@
+             }
+             break;
+         case AVMEDIA_TYPE_DATA:
+-            if (codec_id == AV_CODEC_ID_SMPTE_KLV) {
++             if (codec_id == AV_CODEC_ID_SCTE_35) {
++                put_registration_descriptor(&q, MKTAG('C', 'U', 'E', 'I'));   
++             } else if (codec_id == AV_CODEC_ID_SMPTE_KLV) {
+                 put_registration_descriptor(&q, MKTAG('K', 'L', 'V', 'A'));
+             } else if (codec_id == AV_CODEC_ID_SMPTE_2038) {
+                 put_registration_descriptor(&q, MKTAG('V', 'A', 'N', 'C'));
+
+
+```
+
+
 # SCTE35-ffmpeg-Kabuki
 
 ffmpeg with the SuperKabuki SCTE-35 pass through patch applied.
