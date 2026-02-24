@@ -1,4 +1,4 @@
-# 02/23/2026 Fresh new tarball built from latest FFmpeg repo.
+# 02/21/2026 Fresh new tarball built from latest FFmpeg repo.
 
 ### The patch _(adds about 14 lines )_
 ```diff
